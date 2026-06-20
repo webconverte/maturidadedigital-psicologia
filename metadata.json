@@ -1,0 +1,8 @@
+{
+  "name": "Quiz de Maturidade Digital",
+  "description": "Avalie a presença digital, atração de pacientes e conversão do seu consultório de psicologia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
