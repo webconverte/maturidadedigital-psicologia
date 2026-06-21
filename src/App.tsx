@@ -3,6 +3,7 @@ import {
   QUESTIONS, 
   PERSONAS 
 } from './data/questions';
+import { DeveloperSettings } from './components/DeveloperSettings';
 import { 
   AnswerOption, 
   QuizScores, 
@@ -921,6 +922,8 @@ export default function App() {
         </div>
       </footer>
 
+      {/* DEVELOPER SETTINGS WIDGET */}
+      <DeveloperSettings />
     </div>
   );
 }
