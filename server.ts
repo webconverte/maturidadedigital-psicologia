@@ -15,7 +15,7 @@ async function startServer() {
   // API Route: Process Leads and fire Webhook
   app.post("/api/lead", async (req, res) => {
     try {
-      const { name, email, whatsapp, score, levelName, scores, gargalo, customWebhookUrl } = req.body;
+      const { name, email, whatsapp, score, levelName, scores, gargalo, customWebhookUrl, respostasCompletas } = req.body;
 
       if (!name || !email || !whatsapp) {
         return res.status(400).json({ error: "Campos obrigatórios ausentes: nome, email ou whatsapp." });
@@ -38,7 +38,8 @@ async function startServer() {
         pilarMetricas: scores?.metrics ?? 0,
         maiorGargalo: gargalo,
         leadSource: "Quiz de Maturidade Digital para Psicólogos - Webconverte",
-        whatsappLink: `https://wa.me/55${whatsapp.replace(/\D/g, "")}`
+        whatsappLink: `https://wa.me/55${whatsapp.replace(/\D/g, "")}`,
+        respostasCompletas: respostasCompletas ?? ""
       };
 
       let webhookSent = false;

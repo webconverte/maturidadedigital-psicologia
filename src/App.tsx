@@ -220,6 +220,16 @@ export default function App() {
       // Get customized localstorage webhook URL if saved
       const customWebhookUrl = localStorage.getItem('webconverte_webhook_url') || '';
 
+      // Detailed text of answers as a single string for Make/Spreadsheets
+      let answersText = "";
+      QUESTIONS.forEach((q, idx) => {
+        const selectedPoints = answers[q.id];
+        const selectedOption = q.options.find(opt => opt.points === selectedPoints);
+        if (selectedOption) {
+          answersText += `Pergunta ${idx + 1}: ${q.text}\nResposta: ${selectedOption.text}\n\n`;
+        }
+      });
+
       const payload = {
         name: lead.name,
         email: lead.email,
@@ -229,7 +239,8 @@ export default function App() {
         scores: results.pillarScores,
         gargalo: results.gargalo.name,
         gargaloSalesCopy: salesCopy,
-        customWebhookUrl
+        customWebhookUrl,
+        respostasCompletas: answersText.trim()
       };
 
       const res = await fetch("/api/lead", {
