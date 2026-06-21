@@ -337,9 +337,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white text-slate-700 selection:bg-web-lime selection:text-web-dark flex flex-col justify-between relative overflow-clip">
       {/* BACKGROUND GLOW BLOBS */}
-      <div className="absolute top-[-10%] left-[-20%] w-[600px] h-[600px] rounded-full bg-web-lime/5 blur-[130px] pointer-events-none z-0"></div>
-      <div className="absolute top-[35%] right-[-15%] w-[500px] h-[500px] rounded-full bg-web-green/5 blur-[120px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[-10%] left-[10%] w-[600px] h-[600px] rounded-full bg-web-lime/5 blur-[130px] pointer-events-none z-0"></div>
+      <div className="absolute top-[-10%] left-[-20%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(202,246,132,0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
+      <div className="absolute top-[35%] right-[-15%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(31,70,52,0.08)_0%,transparent_70%)] pointer-events-none z-0"></div>
+      <div className="absolute bottom-[-10%] left-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(202,246,132,0.1)_0%,transparent_70%)] pointer-events-none z-0"></div>
 
       {/* HEADER REMOVED PER USER REQUEST */}
 
@@ -380,7 +380,7 @@ export default function App() {
 
             {/* Visual Value Props */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto text-left py-6">
-              <div className="bg-slate-50/40 backdrop-blur-sm p-5 rounded-2xl border border-slate-200/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
+              <div className="bg-slate-50/40  p-5 rounded-2xl border border-slate-200/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
                 <div className="h-8 w-8 rounded-lg bg-slate-50/80 border border-web-green/30 flex items-center justify-center text-web-green shrink-0 mt-0.5">
                   <BarChart3 className="w-4 h-4" />
                 </div>
@@ -389,7 +389,7 @@ export default function App() {
                   <p className="text-base sm:text-lg text-slate-600 mt-1 leading-relaxed font-medium">Presença, Atração, Conversão e Gestão Estratégica.</p>
                 </div>
               </div>
-              <div className="bg-slate-50/40 backdrop-blur-sm p-5 rounded-2xl border border-slate-200/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
+              <div className="bg-slate-50/40  p-5 rounded-2xl border border-slate-200/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
                 <div className="h-8 w-8 rounded-lg bg-slate-50/80 border border-web-green/30 flex items-center justify-center text-web-green shrink-0 mt-0.5">
                   <HeartHandshake className="w-4 h-4" />
                 </div>
@@ -610,8 +610,8 @@ export default function App() {
           <div className="space-y-10 animate-fade-in" id="results-screen">
             
             {/* Top Score Summary Banner */}
-            <div className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-web-green/20 shadow-xl relative overflow-hidden backdrop-blur-md">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-web-lime/5 rounded-full blur-2xl pointer-events-none -z-10"></div>
+            <div className="bg-slate-50 p-6 sm:p-8 rounded-2xl border border-web-green/20 shadow-xl relative overflow-hidden ">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle,rgba(202,246,132,0.15)_0%,transparent_70%)] rounded-full pointer-events-none -z-10"></div>
               
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div className="space-y-3.5 text-left flex-1">
@@ -725,9 +725,9 @@ export default function App() {
             </div>
 
             {/* Sales Copy: A Ponte para a Webconverte */}
-            <div className="bg-slate-50 text-web-dark p-6 sm:p-10 rounded-2xl border border-web-green/30 shadow-2xl space-y-10 text-left relative overflow-hidden backdrop-blur-md">
-              <div className="absolute top-0 right-0 w-80 h-80 bg-web-lime/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
-              <div className="absolute bottom-0 left-0 w-80 h-80 bg-web-green/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+            <div className="bg-slate-50 text-web-dark p-6 sm:p-10 rounded-2xl border border-web-green/30 shadow-2xl space-y-10 text-left relative overflow-hidden ">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle,rgba(202,246,132,0.15)_0%,transparent_70%)] rounded-full pointer-events-none -z-10"></div>
+              <div className="absolute bottom-0 left-0 w-80 h-80 bg-[radial-gradient(circle,rgba(31,70,52,0.1)_0%,transparent_70%)] rounded-full pointer-events-none -z-10"></div>
               
               <div className="space-y-4">
                 <div className="inline-flex items-center bg-red-50 border border-red-200 text-red-700 px-3 py-1 rounded-full text-base font-bold uppercase tracking-wider space-x-1.5">
