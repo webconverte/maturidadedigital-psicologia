@@ -109,6 +109,11 @@ export default function App() {
     setView('loading');
   };
 
+  // Instantly scroll window to top when currentIdx or view changes (perfect for mobile question transitions)
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentIdx, view]);
+
   // Process loading sequence simulation, then go to results
   useEffect(() => {
     if (view === 'loading') {
@@ -609,7 +614,7 @@ export default function App() {
                     Com base nas suas respostas, identificamos as seguintes fragilidades no seu posicionamento e sugerimos ações práticas executadas pela agência Webconverte para corrigi-las:
                   </p>
 
-                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-web-green/20 scrollbar-track-web-dark/50">
+                  <div className="space-y-4">
                     {QUESTIONS.map((q) => {
                       const score = answers[q.id] || 0;
                       if (score === 100) return null; // focado nos pontos fracos
