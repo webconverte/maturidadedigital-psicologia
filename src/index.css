@@ -13,8 +13,26 @@
   --color-web-light: #F2F2F2;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #041840 !important;
+  -webkit-overflow-scrolling: touch;
+}
+
 body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #041840 !important;
   font-family: var(--font-sans);
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .font-display {

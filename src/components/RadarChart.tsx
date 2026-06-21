@@ -10,11 +10,11 @@ interface RadarChartProps {
 }
 
 export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
-  const width = 480;
-  const height = 400;
-  const centerX = width / 2;      // 240
-  const centerY = height / 2;     // 200
-  const maxRadius = 140;          // Maximized radar radius to leverage maximum space
+  const width = 540;
+  const height = 540;
+  const centerX = width / 2;      // 270
+  const centerY = height / 2;     // 270
+  const maxRadius = 180;          // Maximized radar radius to leverage maximum space
 
   // Pillars list
   const pillars = [
@@ -56,7 +56,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full mx-auto">
-      <div className="relative w-full max-w-[430px] mx-auto">
+      <div className="relative w-full max-w-full sm:max-w-[480px] mx-auto">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible">
           <defs>
             {/* High-fidelity branding gradient for user data */}

@@ -111,7 +111,20 @@ export default function App() {
 
   // Instantly scroll window to top when currentIdx or view changes (perfect for mobile question transitions)
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const scrollToTop = () => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+      if (document.documentElement) {
+        document.documentElement.scrollTop = 0;
+      }
+    };
+    
+    // Call immediately
+    scrollToTop();
+    
+    // Also call with a slight delay to ensure DOM has fully painted the new view/question
+    const timer = setTimeout(scrollToTop, 60);
+    return () => clearTimeout(timer);
   }, [currentIdx, view]);
 
   // Process loading sequence simulation, then go to results
@@ -281,7 +294,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-web-dark text-web-light selection:bg-web-lime selection:text-web-dark flex flex-col justify-between relative overflow-x-hidden">
+    <div className="min-h-screen bg-web-dark text-web-light selection:bg-web-lime selection:text-web-dark flex flex-col justify-between relative overflow-clip">
       {/* BACKGROUND GLOW BLOBS */}
       <div className="absolute top-[-10%] left-[-20%] w-[600px] h-[600px] rounded-full bg-web-lime/5 blur-[130px] pointer-events-none z-0"></div>
       <div className="absolute top-[35%] right-[-15%] w-[500px] h-[500px] rounded-full bg-web-green/5 blur-[120px] pointer-events-none z-0"></div>
@@ -592,7 +605,7 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               
               <div className="space-y-4">
-                <div className="bg-web-navy p-5 rounded-2xl border border-web-green/20 shadow-xl">
+                <div className="bg-web-navy p-3 sm:p-6 rounded-2xl border border-web-green/20 shadow-xl">
                   <h3 className="font-display font-extrabold text-white mb-1 text-base">Visualização dos Seus Pilares</h3>
                   <p className="text-xs text-slate-450 text-slate-400 mb-4">Veja onde sua estrutura está forte e onde ela está com buracos operacionais.</p>
                   
