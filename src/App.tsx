@@ -218,7 +218,7 @@ export default function App() {
       setSubmitting(true);
       
       // Get customized localstorage webhook URL if saved
-      const customWebhookUrl = localStorage.getItem('webconverte_webhook_url') || '';
+      const customWebhookUrl = localStorage.getItem('webconverte_webhook_url') || import.meta.env.VITE_MAKE_WEBHOOK_URL;
 
       // Detailed text of answers as a single string for Make/Spreadsheets
       let answersText = "";
@@ -231,30 +231,63 @@ export default function App() {
       });
 
       const payload = {
+        timestamp: new Date().toISOString(),
         name: lead.name,
         email: lead.email,
         whatsapp: lead.whatsapp,
-        score: results.average / 100,
+        scoreFinal: `${Math.round(results.average)}%`,
         levelName: results.persona.title,
-        scores: results.pillarScores,
-        gargalo: results.gargalo.name,
+        pilarPresenca: results.pillarScores?.presence ?? 0,
+        pilarInstagram: results.pillarScores?.instagram ?? 0,
+        pilarWhatsapp: results.pillarScores?.whatsapp ?? 0,
+        pilarMetricas: results.pillarScores?.metrics ?? 0,
+        maiorGargalo: results.gargalo.name,
         gargaloSalesCopy: salesCopy,
-        customWebhookUrl,
+        leadSource: "Quiz de Maturidade Digital para Psicólogos - Webconverte",
+        whatsappLink: `https://wa.me/55${lead.whatsapp.replace(/\D/g, "")}`,
         respostasCompletas: answersText.trim()
       };
 
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
+      let success = false;
+      let statusText = "Webhook URL not configured";
 
-      const data = await res.json();
+      if (customWebhookUrl && customWebhookUrl.startsWith("http")) {
+        try {
+          const res = await fetch(customWebhookUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+          success = res.ok;
+          statusText = `Status ${res.status} - ${res.statusText}`;
+        } catch (webhookErr: any) {
+          success = false;
+          statusText = webhookErr.message || "Request failed";
+          console.error("Webhook submission failed:", webhookErr);
+        }
+      } else {
+        // Se quisermos manter compatibilidade com desenvolvimento back-end caso tenham proxy, podemos tentar o /api/lead fallback aqui, 
+        // mas como eles vão usar no github, o fallback vai dar erro /api/lead de qualquer forma.
+        try {
+           const res = await fetch("/api/lead", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({ ...payload, customWebhookUrl }) // Fallback para dev local
+           });
+           
+           if(res.ok) {
+              const data = await res.json();
+              success = data.webhookSent;
+              statusText = data.webhookStatus || "Ok via /api/lead";
+           } else {
+              statusText = "Local backend missing or errored";
+           }
+        } catch (e) {
+           console.log("No backend available and no Make Webhook configured locally.");
+        }
+      }
       
       // Log response locally in state and localStorage
-      const success = res.ok && data.webhookSent;
-      const statusText = data.webhookStatus || "Ok";
-      
       setWebhookResult({
         success,
         status: statusText
