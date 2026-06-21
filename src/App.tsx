@@ -12,7 +12,6 @@ import {
 } from './types';
 import { RadarChart } from './components/RadarChart';
 import { getFeedbackForQuestion } from './data/feedback';
-import { DeveloperSettings } from './components/DeveloperSettings';
 import { 
   ArrowRight, 
   Lock, 
@@ -808,7 +807,7 @@ export default function App() {
 
       </main>
 
-      {/* FOOTER & BACKOFFICE CONTAINER */}
+      {/* FOOTER CONTAINER */}
       <footer className="bg-web-dark border-t border-web-green/10 py-8 px-4 mt-12 text-center text-sm text-slate-300 space-y-4 relative z-10">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-left space-y-1.5">
@@ -819,11 +818,6 @@ export default function App() {
             <span className="text-xs bg-web-navy border border-web-green/20 text-slate-200 px-3 py-1 rounded font-bold font-mono">Versão 1.0.0</span>
             <span className="text-xs text-slate-400 font-semibold">© {new Date().getFullYear()} Webconverte. Todos os direitos reservados.</span>
           </div>
-        </div>
-
-        {/* Persistable backoffice settings so they can test/monitor with ease */}
-        <div className="max-w-4xl mx-auto text-left pt-2">
-          <DeveloperSettings />
         </div>
       </footer>
 
