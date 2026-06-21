@@ -322,6 +322,21 @@ export default function App() {
               </p>
             </div>
 
+            <div className="flex flex-col items-center space-y-3 pt-2">
+              <button
+                id="btn-start-quiz"
+                onClick={() => setView('quiz')}
+                className="w-full sm:w-auto bg-web-lime hover:bg-web-lime/90 active:bg-web-lime/85 text-web-dark font-display font-extrabold text-base px-8 py-4 rounded-xl shadow-lg shadow-web-lime/10 transition-all duration-350 transform hover:-translate-y-0.5 flex items-center justify-center space-x-2.5 cursor-pointer"
+              >
+                <span>Descobrir Minha Maturidade</span>
+                <ArrowRight className="w-5 h-5 text-web-dark" />
+              </button>
+              <div className="flex items-center space-x-1.5 text-xs sm:text-sm text-slate-200 font-bold pt-1">
+                <Clock className="w-4 h-4 text-web-lime" />
+                <span>Leva apenas 3 minutos com 10 perguntas estratégicas</span>
+              </div>
+            </div>
+
             {/* Visual Value Props */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mx-auto text-left py-6">
               <div className="bg-web-navy/40 backdrop-blur-sm p-5 rounded-2xl border border-web-navy/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
@@ -341,21 +356,6 @@ export default function App() {
                   <h4 className="font-bold text-white text-sm sm:text-base">Plano de Ação Ético</h4>
                   <p className="text-xs sm:text-sm text-slate-300 mt-1 leading-relaxed font-medium">Recomendações técnicas estruturadas sem infringir as diretrizes do CRP.</p>
                 </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center space-y-3 pt-2">
-              <button
-                id="btn-start-quiz"
-                onClick={() => setView('quiz')}
-                className="w-full sm:w-auto bg-web-lime hover:bg-web-lime/90 active:bg-web-lime/85 text-web-dark font-display font-extrabold text-base px-8 py-4 rounded-xl shadow-lg shadow-web-lime/10 transition-all duration-350 transform hover:-translate-y-0.5 flex items-center justify-center space-x-2.5 cursor-pointer"
-              >
-                <span>Descobrir Minha Maturidade</span>
-                <ArrowRight className="w-5 h-5 text-web-dark" />
-              </button>
-              <div className="flex items-center space-x-1.5 text-xs sm:text-sm text-slate-200 font-bold pt-1">
-                <Clock className="w-4 h-4 text-web-lime" />
-                <span>Leva apenas 3 minutos com 10 perguntas estratégicas</span>
               </div>
             </div>
           </div>
