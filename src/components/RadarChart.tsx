@@ -10,11 +10,11 @@ interface RadarChartProps {
 }
 
 export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
-  const width = 540;
-  const height = 540;
-  const centerX = width / 2;      // 270
-  const centerY = height / 2;     // 270
-  const maxRadius = 180;          // Maximized radar radius to leverage maximum space
+  const width = 800;
+  const height = 800;
+  const centerX = width / 2;      // 400
+  const centerY = height / 2;     // 400
+  const maxRadius = 260;          // Maximized radar radius to leverage maximum space
 
   // Pillars list
   const pillars = [
@@ -56,7 +56,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
 
   return (
     <div className="flex flex-col items-center justify-center w-full mx-auto">
-      <div className="relative w-full max-w-full sm:max-w-[480px] mx-auto">
+      <div className="relative w-full max-w-full sm:max-w-[650px] mx-auto my-4 overflow-visible">
         <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto overflow-visible">
           <defs>
             {/* High-fidelity branding gradient for user data */}
@@ -89,9 +89,9 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
             return (
               <text
                 key={`value-lbl-${level}`}
-                x={x - 12}
-                y={y + 13}
-                className="font-mono text-[10px] sm:text-[11px] fill-slate-400 font-bold"
+                x={x - 16}
+                y={y + 16}
+                className="font-mono text-[14px] sm:text-[15px] fill-[#64748B] font-bold"
               >
                 {level}%
               </text>
@@ -133,14 +133,14 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
                   cx={x}
                   cy={y}
                   r="6"
-                  className="fill-web-lime stroke-web-dark stroke-2 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:fill-white"
+                  className="fill-[#88A65B] stroke-web-dark stroke-2 shadow-lg transition-all duration-300 group-hover:scale-125 group-hover:fill-white"
                   filter="url(#softShadow)"
                 />
                 <circle
                   cx={x}
                   cy={y}
                   r="12"
-                  className="fill-web-lime/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="fill-[#88A65B]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
               </g>
             );
@@ -175,15 +175,15 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
                   x={point.x + Number(dx)}
                   y={point.y + Number(dy)}
                   textAnchor={textAnchor}
-                  className="text-[11px] sm:text-[12px] font-bold fill-slate-100 font-display uppercase tracking-wider"
+                  className="text-[15px] sm:text-[16px] font-bold fill-[#041840] font-display uppercase tracking-wider"
                 >
                   {p.label}
                 </text>
                 <text
                   x={point.x + Number(dx)}
-                  y={point.y + Number(dy) + 14}
+                  y={point.y + Number(dy) + 18}
                   textAnchor={textAnchor}
-                  className="text-[12px] sm:text-[13px] font-mono fill-web-lime font-black"
+                  className="text-[16px] sm:text-[18px] font-mono fill-[#88A65B] font-black"
                 >
                   {p.val}%
                 </text>
@@ -193,12 +193,12 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
         </svg>
       </div>
  
-      <div className="mt-5 grid grid-cols-2 gap-3.5 w-full text-xs sm:text-sm border-t border-web-dark/85 pt-4">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full text-xs sm:text-sm border-t border-slate-200 pt-4">
         {pillars.map((p) => (
-          <div key={`legend-${p.key}`} className="flex items-center space-x-2 bg-web-dark/45 px-3 py-2 rounded-xl border border-web-green/5">
-            <span className="w-2.5 h-2.5 rounded-full bg-web-lime shrink-0"></span>
-            <span className="text-slate-300 font-semibold text-xs sm:text-sm truncate">{p.label}</span>
-            <span className="font-mono text-web-lime ml-auto font-black text-xs sm:text-sm">{p.val}%</span>
+          <div key={`legend-${p.key}`} className="flex items-center space-x-2 bg-slate-50 px-3 py-2 rounded-xl border border-web-green/5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#88A65B] shrink-0"></span>
+            <span className="text-slate-700 font-semibold text-sm sm:text-base truncate">{p.label}</span>
+            <span className="font-mono text-[#88A65B] ml-auto font-black text-sm sm:text-base">{p.val}%</span>
           </div>
         ))}
       </div>
