@@ -284,17 +284,25 @@ export default function App() {
     
     let diagnosis = `- *Nome:* ${lead.name}\n- *Nota Geral:* ${Math.round(results.average)}%\n- *Classificação:* ${results.persona.title}\n`;
     if (!isPerfect) {
-      diagnosis += `- *Maior Gargalo:* ${results.gargalo.name}\n\n`;
-    } else {
-      diagnosis += `\n`;
+      diagnosis += `- *Maior Gargalo:* ${results.gargalo.name}\n`;
     }
+
+    let answersList = `\n📋 *Minhas Respostas:*\n`;
+    QUESTIONS.forEach((q, idx) => {
+      const selectedPoints = answers[q.id];
+      const selectedOption = q.options.find(opt => opt.points === selectedPoints);
+      if (selectedOption) {
+        answersList += `\n*${idx + 1}. ${q.text}*\nR: ${selectedOption.text}\n`;
+      }
+    });
 
     const encodedText = encodeURIComponent(
       `Olá! Estive analisando meu consultório no Quiz de Maturidade Digital e gostaria de conversar sobre minha maturidade digital.\n\n` +
       `📊 *Meu Diagnóstico:* \n` +
       diagnosis +
-      (!isPerfect ? `📝 *Observação sobre meu Gargalo:* ${salesCopy}\n\n` : '') +
-      `Gostaria de agendar a minha consultoria personalizada para traçarmos o plano rumo à previsibilidade de pacientes!`
+      (!isPerfect ? `\n📝 *Observação sobre meu Gargalo:* ${salesCopy}\n` : '') +
+      answersList +
+      `\nGostaria de agendar a minha consultoria personalizada para traçarmos o plano rumo à previsibilidade de pacientes!`
     );
     window.open(`https://wa.me/5548991444144?text=${encodedText}`, '_blank');
   };
@@ -303,15 +311,15 @@ export default function App() {
   const getBadgeStyle = (level: string) => {
     switch (level) {
       case 'survival':
-        return 'bg-red-50 border border-red-200 text-red-700 px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider shadow-sm';
+        return 'bg-red-50 border border-red-200 text-red-700 px-3 py-1 text-base rounded-full font-bold uppercase tracking-wider shadow-sm';
       case 'stagnation':
-        return 'bg-amber-50 border border-amber-200 text-amber-700 px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider shadow-sm';
+        return 'bg-amber-50 border border-amber-200 text-amber-700 px-3 py-1 text-base rounded-full font-bold uppercase tracking-wider shadow-sm';
       case 'growth':
-        return 'bg-indigo-50 border border-indigo-200 text-indigo-700 px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider shadow-sm';
+        return 'bg-indigo-50 border border-indigo-200 text-indigo-700 px-3 py-1 text-base rounded-full font-bold uppercase tracking-wider shadow-sm';
       case 'authority':
-        return 'bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider shadow-sm';
+        return 'bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-1 text-base rounded-full font-bold uppercase tracking-wider shadow-sm';
       default:
-        return 'bg-slate-50 border border-slate-200 text-slate-600 px-3 py-1 text-xs rounded-full font-bold uppercase tracking-wider shadow-sm';
+        return 'bg-slate-50 border border-slate-200 text-slate-600 px-3 py-1 text-base rounded-full font-bold uppercase tracking-wider shadow-sm';
     }
   };
 
@@ -330,7 +338,7 @@ export default function App() {
         {/* VIEW 1: INTRO */ }
         {view === 'intro' && (
           <div className="max-w-2xl mx-auto text-center space-y-8 py-10 animate-fade-in" id="intro-screen">
-            <div className="inline-flex items-center space-x-2 bg-slate-50/60 border border-web-green/30 rounded-full px-4 py-1.5 text-xs text-web-green font-bold shadow-md shadow-web-dark/20">
+            <div className="inline-flex items-center space-x-2 bg-slate-50/60 border border-web-green/30 rounded-full px-4 py-1.5 text-base text-web-green font-bold shadow-md shadow-web-dark/20">
               <Sparkles className="w-3.5 h-3.5 text-web-green" />
               <span>Diagnóstico Gratuito • CRP Ético</span>
             </div>
@@ -353,7 +361,7 @@ export default function App() {
                 <span>Descobrir Minha Maturidade</span>
                 <ArrowRight className="w-5 h-5 text-web-dark" />
               </button>
-              <div className="flex items-center space-x-1.5 text-xs sm:text-sm text-slate-700 font-bold pt-1">
+              <div className="flex items-center space-x-1.5 text-base sm:text-lg text-slate-700 font-bold pt-1">
                 <Clock className="w-4 h-4 text-web-green" />
                 <span>Leva apenas 3 minutos com 10 perguntas estratégicas</span>
               </div>
@@ -366,8 +374,8 @@ export default function App() {
                   <BarChart3 className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-web-dark text-sm sm:text-base">4 Pilares de Maturidade</h4>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">Presença, Atração, Conversão e Gestão Estratégica.</p>
+                  <h4 className="font-bold text-web-dark text-base sm:text-lg">4 Pilares de Maturidade</h4>
+                  <p className="text-base sm:text-lg text-slate-600 mt-1 leading-relaxed font-medium">Presença, Atração, Conversão e Gestão Estratégica.</p>
                 </div>
               </div>
               <div className="bg-slate-50/40 backdrop-blur-sm p-5 rounded-2xl border border-slate-200/80 flex items-start space-x-3.5 shadow-lg hover:border-web-green/35 transition-colors duration-300">
@@ -375,8 +383,8 @@ export default function App() {
                   <HeartHandshake className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-web-dark text-sm sm:text-base">Plano de Ação Ético</h4>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed font-medium">Recomendações técnicas estruturadas sem infringir as diretrizes do CRP.</p>
+                  <h4 className="font-bold text-web-dark text-base sm:text-lg">Plano de Ação Ético</h4>
+                  <p className="text-base sm:text-lg text-slate-600 mt-1 leading-relaxed font-medium">Recomendações técnicas estruturadas sem infringir as diretrizes do CRP.</p>
                 </div>
               </div>
             </div>
@@ -388,7 +396,7 @@ export default function App() {
           <div className="max-w-2xl mx-auto space-y-6 animate-fade-in" id="quiz-screen">
             {/* Quiz Progress Header */}
             <div className="bg-slate-50/90 p-5 rounded-2xl border border-web-green/20 shadow-md space-y-4">
-              <div className="flex items-center justify-between text-xs text-slate-600 font-bold tracking-wider uppercase">
+              <div className="flex items-center justify-between text-base text-slate-600 font-bold tracking-wider uppercase">
                 <span className="text-web-green font-extrabold">{QUESTIONS[currentIdx].pillarName}</span>
                 <span>Pergunta {currentIdx + 1} de {QUESTIONS.length}</span>
               </div>
@@ -416,10 +424,10 @@ export default function App() {
                     onClick={() => handleSelectOption(option.points)}
                     className="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-web-green/40 bg-white hover:bg-slate-50 text-slate-600 hover:text-web-dark transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-web-green flex items-start space-x-3.5 group cursor-pointer"
                   >
-                    <span className="w-6.5 h-6.5 rounded-full border border-slate-200 text-slate-500 group-hover:border-web-lime group-hover:text-web-green font-mono text-xs font-bold flex items-center justify-center shrink-0 transition bg-white group-hover:bg-slate-50 mt-0.5">
+                    <span className="w-6.5 h-6.5 rounded-full border border-slate-200 text-slate-500 group-hover:border-web-lime group-hover:text-web-green font-mono text-base font-bold flex items-center justify-center shrink-0 transition bg-white group-hover:bg-slate-50 mt-0.5">
                       {String.fromCharCode(65 + oIdx)}
                     </span>
-                    <span className="text-sm font-medium leading-[22px] mt-0.5">{option.text}</span>
+                    <span className="text-base font-medium leading-[22px] mt-0.5">{option.text}</span>
                   </button>
                 ))}
               </div>
@@ -429,7 +437,7 @@ export default function App() {
                 <button
                   onClick={handlePreviousQuestion}
                   disabled={currentIdx === 0}
-                  className={`text-xs sm:text-sm font-bold px-4 py-2.5 rounded-lg transition flex items-center space-x-1.5 shrink-0 ${
+                  className={`text-base sm:text-lg font-bold px-4 py-2.5 rounded-lg transition flex items-center space-x-1.5 shrink-0 ${
                     currentIdx === 0 
                       ? 'text-slate-600 cursor-not-allowed' 
                       : 'text-slate-700 hover:text-web-dark hover:bg-white'
@@ -437,7 +445,7 @@ export default function App() {
                 >
                   <span>← Voltar</span>
                 </button>
-                <div className="text-xs sm:text-sm text-slate-350 font-semibold tracking-wide">
+                <div className="text-base sm:text-lg text-slate-350 font-semibold tracking-wide">
                   Respostas salvas automaticamente
                 </div>
               </div>
@@ -453,7 +461,7 @@ export default function App() {
               <h2 className="font-display font-extrabold text-2xl text-web-dark tracking-tight">
                 Seu Diagnóstico está quase pronto...
               </h2>
-              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+              <p className="text-base text-slate-500 max-w-sm mx-auto">
                 Analisamos suas respostas. Cadastre-se abaixo para liberar o relatório de maturidade estruturado.
               </p>
             </div>
@@ -463,16 +471,16 @@ export default function App() {
 
               <div className="bg-amber-950/20 border border-amber-900/40 rounded-xl p-4.5 flex items-start space-x-3.5 text-amber-100 leading-relaxed">
                 <ShieldAlert className="w-5 h-5 text-amber-505 text-amber-600 shrink-0 mt-0.5" />
-                <div className="text-sm space-y-1.5">
-                  <h4 className="font-extrabold text-amber-600 uppercase tracking-wider text-xs">Aviso Ético (Código de Ética do CRP)</h4>
-                  <p className="opacity-95 leading-relaxed text-xs text-slate-600">
+                <div className="text-base space-y-1.5">
+                  <h4 className="font-extrabold text-amber-600 uppercase tracking-wider text-base">Aviso Ético (Código de Ética do CRP)</h4>
+                  <p className="opacity-95 leading-relaxed text-base text-slate-600">
                     Nossas recomendações seguem as limitações de publicidade ética clínica estabelecidas pelo Conselho Federal de Psicologia. Não incentivamos autopromoção fútil, promessas infundadas ou captação de má-fé.
                   </p>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <span className="text-xs font-bold text-web-green uppercase tracking-wider block">Área de Identificação</span>
+                <span className="text-base font-bold text-web-green uppercase tracking-wider block">Área de Identificação</span>
                 <p className="font-display font-extrabold text-base sm:text-lg text-web-dark">
                   Preencha para liberar o seu relatório de maturidade e as sugestões de boas práticas da Webconverte:
                 </p>
@@ -480,7 +488,7 @@ export default function App() {
 
               <form onSubmit={handleSubmitLead} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-base font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
                     Nome Completo
                   </label>
                   <input
@@ -489,12 +497,12 @@ export default function App() {
                     value={lead.name}
                     onChange={(e) => setLead(prev => ({ ...prev, name: e.target.value }))}
                     placeholder="Ex: Dra. Carolina Albuquerque"
-                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60"
+                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-base font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
                     E-mail Profissional
                   </label>
                   <input
@@ -503,12 +511,12 @@ export default function App() {
                     value={lead.email}
                     onChange={(e) => setLead(prev => ({ ...prev, email: e.target.value }))}
                     placeholder="Ex: carolina@albuquerquepsicologia.com.br"
-                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60"
+                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
+                  <label className="block text-base font-bold text-slate-600 mb-1.5 uppercase tracking-wider">
                     WhatsApp (com DDD)
                   </label>
                   <input
@@ -517,7 +525,7 @@ export default function App() {
                     value={lead.whatsapp}
                     onChange={handlePhoneChange}
                     placeholder="Ex: (48) 99144-4144"
-                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60 font-mono"
+                    className="w-full px-3.5 py-3 border border-slate-850 rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-web-lime bg-white text-web-dark placeholder-slate-600 focus:border-web-lime/60 font-mono"
                   />
                 </div>
 
@@ -559,13 +567,13 @@ export default function App() {
               <h3 className="font-display font-extrabold text-xl text-web-dark">
                 Gerando Seu Diagnóstico de Maturidade...
               </h3>
-              <p className="text-xs text-slate-500 max-w-xs mx-auto">
+              <p className="text-base text-slate-500 max-w-xs mx-auto">
                 Estamos processando suas 10 respostas baseadas nos algoritmos de conversão comercial da Webconverte.
               </p>
             </div>
 
             {/* checklist of processed items */}
-            <div className="max-w-xs mx-auto text-left bg-slate-50 p-5 rounded-2xl border border-web-green/20 shadow-xl space-y-3 text-xs text-slate-600">
+            <div className="max-w-xs mx-auto text-left bg-slate-50 p-5 rounded-2xl border border-web-green/20 shadow-xl space-y-3 text-base text-slate-600">
               <div className="flex items-center space-x-2.5">
                 <CheckCircle2 className="w-4 h-4 text-web-green animate-pulse shrink-0" />
                 <span className="font-semibold text-web-dark">Compilando respostas dos 4 pilares...</span>
@@ -606,18 +614,18 @@ export default function App() {
                     Sua Maturidade Digital é de <span className="text-web-green text-3xl sm:text-4xl font-extrabold">{Math.round(results.average)}%</span>
                   </h1>
                   
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-lg">
+                  <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-lg">
                     {results.persona.description}
                   </p>
                 </div>
 
                 {results.gargalo.score < 100 && (
                   <div className="shrink-0 bg-white border border-web-green/20 p-5 rounded-xl text-center md:min-w-[170px] shadow-inner">
-                    <span className="text-xs text-slate-600 font-extrabold uppercase tracking-widest block">Maior Gargalo</span>
+                    <span className="text-base text-slate-600 font-extrabold uppercase tracking-widest block">Maior Gargalo</span>
                     <div className="font-display font-extrabold text-web-green text-lg mt-2.5 mb-2.5 max-w-[160px] mx-auto leading-tight">
                       {results.gargalo.name.split(" (")[0]}
                     </div>
-                    <span className="text-xs font-mono font-bold bg-amber-100 border border-amber-900/45 text-amber-700 px-3 py-1 rounded-full inline-block">
+                    <span className="text-base font-mono font-bold bg-amber-100 border border-amber-900/45 text-amber-700 px-3 py-1 rounded-full inline-block">
                       {results.gargalo.score}% de maturidade
                     </span>
                   </div>
@@ -631,7 +639,7 @@ export default function App() {
               <div className="space-y-4 w-full">
                 <div className="bg-slate-50 p-3 sm:p-6 rounded-2xl border border-web-green/20 shadow-xl">
                   <h3 className="font-display font-extrabold text-web-dark mb-1 text-base">Visualização dos Seus Pilares</h3>
-                  <p className="text-xs text-slate-450 text-slate-500 mb-4">Veja onde sua estrutura está forte e onde ela está com buracos operacionais.</p>
+                  <p className="text-base text-slate-450 text-slate-500 mb-4">Veja onde sua estrutura está forte e onde ela está com buracos operacionais.</p>
                   
                   <RadarChart scores={results.pillarScores} />
                 </div>
@@ -647,7 +655,7 @@ export default function App() {
                     <h3 className="font-display font-extrabold text-web-dark text-base">Seu Relatório de Oportunidades</h3>
                   </div>
                   
-                  <p className="text-xs text-slate-500 leading-relaxed mb-4">
+                  <p className="text-base text-slate-500 leading-relaxed mb-4">
                     Com base nas suas respostas, identificamos as seguintes fragilidades no seu posicionamento e sugerimos ações práticas executadas pela agência Webconverte para corrigi-las:
                   </p>
 
@@ -659,24 +667,24 @@ export default function App() {
                       return (
                         <div key={`weak-${q.id}`} className="bg-white/40 p-5 rounded-xl border border-web-green/10 space-y-4">
                           <div className="flex items-center justify-between border-b border-slate-200 pb-2.5">
-                            <span className="text-xs font-extrabold text-web-green uppercase tracking-widest bg-slate-50 px-3 py-1 rounded border border-web-green/15">
+                            <span className="text-base font-extrabold text-web-green uppercase tracking-widest bg-slate-50 px-3 py-1 rounded border border-web-green/15">
                               {q.pillarName}
                             </span>
-                            <span className="text-xs font-mono text-slate-600 font-bold">
+                            <span className="text-base font-mono text-slate-600 font-bold">
                               Pontuação: {score}%
                             </span>
                           </div>
                           
                           <div className="space-y-1.5">
-                            <span className="text-xs font-extrabold text-slate-500 uppercase tracking-widest block">O que você relatou:</span>
-                            <p className="text-sm text-web-navy leading-relaxed italic pr-1">
+                            <span className="text-base font-extrabold text-slate-500 uppercase tracking-widest block">O que você relatou:</span>
+                            <p className="text-base text-web-navy leading-relaxed italic pr-1">
                               &ldquo;{feedback.description}&rdquo;
                             </p>
                           </div>
                           
                           <div className="bg-web-lime/5 p-4 rounded-lg border border-web-lime/15 space-y-1.5">
-                            <span className="text-xs font-black text-web-green uppercase tracking-widest block">💡 Como a Webconverte Soluciona:</span>
-                            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                            <span className="text-base font-black text-web-green uppercase tracking-widest block">💡 Como a Webconverte Soluciona:</span>
+                            <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-medium">
                               {feedback.solution}
                             </p>
                           </div>
@@ -687,8 +695,8 @@ export default function App() {
                     {QUESTIONS.every(q => (answers[q.id] || 0) === 100) && (
                       <div className="bg-web-lime/5 p-6 text-center rounded-xl border border-web-lime/20 space-y-3">
                         <Sparkles className="w-8 h-8 text-web-green mx-auto animate-pulse" />
-                        <h4 className="font-display font-extrabold text-web-dark text-sm uppercase tracking-wide">Maturidade Excepcional!</h4>
-                        <p className="text-sm text-slate-700 leading-relaxed">
+                        <h4 className="font-display font-extrabold text-web-dark text-base uppercase tracking-wide">Maturidade Excepcional!</h4>
+                        <p className="text-base text-slate-700 leading-relaxed">
                           Você atingiu nota máxima em todos os 10 pilares da nossa avaliação. Não identificamos pontos fracos imediatos de captação!
                         </p>
                       </div>
@@ -697,7 +705,7 @@ export default function App() {
                 </div>
 
                 {!QUESTIONS.every(q => (answers[q.id] || 0) === 100) && (
-                  <div className="bg-amber-50 border border-amber-200 text-slate-700 rounded-xl p-4 text-center text-sm leading-relaxed mt-4 shadow-sm">
+                  <div className="bg-amber-50 border border-amber-200 text-slate-700 rounded-xl p-4 text-center text-base leading-relaxed mt-4 shadow-sm">
                     ⚠️ <span className="font-bold text-amber-600">Atenção Especial:</span> Seu pilar de maior sensibilidade é <strong className="text-web-dark font-extrabold">{results.gargalo.name.split(" (")[0]}</strong> (com {results.gargalo.score}%). Recomendamos priorizar a correção desse pilar imediatamente.
                   </div>
                 )}
@@ -711,7 +719,7 @@ export default function App() {
               <div className="absolute bottom-0 left-0 w-80 h-80 bg-web-green/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
               
               <div className="space-y-4">
-                <div className="inline-flex items-center bg-red-50 border border-red-200 text-red-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider space-x-1.5">
+                <div className="inline-flex items-center bg-red-50 border border-red-200 text-red-700 px-3 py-1 rounded-full text-base font-bold uppercase tracking-wider space-x-1.5">
                   <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0" />
                   <span>Diagnóstico Estratégico</span>
                 </div>
@@ -720,7 +728,7 @@ export default function App() {
                   Se a sua teia de maturidade tem lacunas, seu consultório está <span className="text-red-600">perdendo pacientes particulares</span> todos os dias.
                 </h2>
                 
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl font-normal">
+                <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl font-normal">
                   {results.average < 100 ? (
                     <>Seu diagnóstico identificou que o seu maior gargalo atual é o pilar de <strong className="text-web-green font-bold">{results.gargalo.name.split(" (")[0]}</strong>. {salesCopy} Enquanto essa brecha não for blindada profissionalmente, cada interacão ou cada real investido de forma intuitiva acaba sendo desperdiçado, beneficiando concorrentes regionais com menor capacidade clínica, mas maior presença digital.</>
                   ) : (
@@ -731,23 +739,23 @@ export default function App() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 border-t border-slate-200">
                 <div className="space-y-3">
-                  <p className="text-xs font-semibold text-web-green uppercase tracking-widest">
+                  <p className="text-base font-semibold text-web-green uppercase tracking-widest">
                     A REALIDADE DO MERCADO:
                   </p>
                   <h3 className="font-display font-extrabold text-lg sm:text-xl text-web-dark leading-snug">
                     Você se especializou para cuidar de vidas, não para criar sites ou dominar a tecnologia de marketing.
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                  <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
                     Você precisa aprender como fazer da forma correta e ter uma estrutura completa de canais, que entregamos em nossa implementação, ao invés de desperdiçar seu tempo lidando com configurações técnicas ou tentando improvisar posicionamentos.
                   </p>
                 </div>
 
                 <div className="bg-white/55 border border-web-green/10 rounded-xl p-5 hover:border-web-green/20 transition-all duration-300 flex flex-col justify-between">
                   <div className="space-y-3.5">
-                    <span className="text-sm font-extrabold text-web-green uppercase tracking-widest block border-b border-slate-200 pb-3">
+                    <span className="text-base font-extrabold text-web-green uppercase tracking-widest block border-b border-slate-200 pb-3">
                       Sua Escolha Estratégica Hoje:
                     </span>
-                    <div className="space-y-4 text-sm">
+                    <div className="space-y-4 text-base">
                       <div className="flex items-start space-x-3.5">
                         <span className="px-2 py-1 rounded bg-red-50 text-red-700 border border-red-200 shrink-0 text-[11px] font-black uppercase tracking-wider">Caminho 1</span>
                         <p className="text-slate-600 leading-relaxed"><strong className="text-web-navy">Gastar tempo e recursos testando sozinho:</strong> Tentando aprender design, copywriting de conversão e tecnologias por tentativa e erro, lidando com frustração e resultados estagnados.</p>
@@ -763,45 +771,45 @@ export default function App() {
 
               <div className="bg-white/45 p-6 sm:p-8 rounded-xl border border-web-green/15 hover:border-web-green/25 transition-all duration-300 space-y-6 shadow-2xl relative overflow-hidden">
                 <div className="space-y-1.5 relative z-10 text-left">
-                  <span className="text-xs font-extrabold text-web-green uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded border border-web-green/15 inline-block mb-1">
+                  <span className="text-base font-extrabold text-web-green uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded border border-web-green/15 inline-block mb-1">
                     Nosso Serviço de Implementação Integrado
                   </span>
-                  <p className="text-sm text-slate-700 leading-relaxed">
+                  <p className="text-base text-slate-700 leading-relaxed">
                     Nós montamos, configuramos e organizamos todo o seu ecossistema para que ele se torne um ativo real do seu consultório, respeitando as normas do CFP:
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 text-sm relative z-10">
+                <div className="grid grid-cols-1 gap-5 text-base relative z-10">
                   <div className="bg-slate-50 p-4.5 rounded-xl border border-web-green/10 hover:border-web-green/20 transition-all duration-300 space-y-2.5">
                     <div className="flex items-center space-x-2 text-web-green">
                       <CheckCircle2 className="w-4.5 h-4.5 text-web-green shrink-0" />
-                      <strong className="text-web-navy font-extrabold block text-sm">📍 Planejamento Estratégico</strong>
+                      <strong className="text-web-navy font-extrabold block text-base">📍 Planejamento Estratégico</strong>
                     </div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">Relatório completo do modelo de negócio e criação e otimização total do seu perfil no Google, garantindo que pacientes na sua localidade te encontrem e confiem em você de imediato.</p>
+                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed">Relatório completo do modelo de negócio e criação e otimização total do seu perfil no Google, garantindo que pacientes na sua localidade te encontrem e confiem em você de imediato.</p>
                   </div>
 
                   <div className="bg-slate-50 p-4.5 rounded-xl border border-web-green/10 hover:border-web-green/20 transition-all duration-300 space-y-2.5">
                     <div className="flex items-center space-x-2 text-web-green">
                       <CheckCircle2 className="w-4.5 h-4.5 text-web-green shrink-0" />
-                      <strong className="text-web-navy font-extrabold block text-sm">🌐 Atração e relacionamento</strong>
+                      <strong className="text-web-navy font-extrabold block text-base">🌐 Atração e relacionamento</strong>
                     </div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">Construímos seu Site, estruturamos os acessos do Link da Bio da sua página, Blog para publicação de conteúdos, além da implantação nativa de um Quiz de autopercepção.</p>
+                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed">Construímos seu Site, estruturamos os acessos do Link da Bio da sua página, Blog para publicação de conteúdos, além da implantação nativa de um Quiz de autopercepção.</p>
                   </div>
 
                   <div className="bg-slate-50 p-4.5 rounded-xl border border-web-green/10 hover:border-web-green/20 transition-all duration-300 space-y-2.5">
                     <div className="flex items-center space-x-2 text-web-green">
                       <CheckCircle2 className="w-4.5 h-4.5 text-web-green shrink-0" />
-                      <strong className="text-web-navy font-extrabold block text-sm">📱 Vendas e encantamento</strong>
+                      <strong className="text-web-navy font-extrabold block text-base">📱 Vendas e encantamento</strong>
                     </div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">Configuração da Bio, criação de posts e roteiros, planejamento de 90 dias com artes editáveis. Inclui estruturação completa do WhatsApp com scripts validados de conversão sem ferir a ética.</p>
+                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed">Configuração da Bio, criação de posts e roteiros, planejamento de 90 dias com artes editáveis. Inclui estruturação completa do WhatsApp com scripts validados de conversão sem ferir a ética.</p>
                   </div>
 
                   <div className="bg-slate-50 p-4.5 rounded-xl border border-web-green/10 hover:border-web-green/20 transition-all duration-300 space-y-2.5">
                     <div className="flex items-center space-x-2 text-web-green">
                       <CheckCircle2 className="w-4.5 h-4.5 text-web-green shrink-0" />
-                      <strong className="text-web-navy font-extrabold block text-sm">📊 Dados e gestão</strong>
+                      <strong className="text-web-navy font-extrabold block text-base">📊 Dados e gestão</strong>
                     </div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">Não é "fazer e largar".  Dashboard completo, treinamento para impulsionar conteúdo e um acompanhamento semanal focado para garantir o crescimento acelerado da sua agenda.</p>
+                    <p className="text-slate-600 text-base sm:text-lg leading-relaxed">Não é "fazer e largar".  Dashboard completo, treinamento para impulsionar conteúdo e um acompanhamento semanal focado para garantir o crescimento acelerado da sua agenda.</p>
                   </div>
                 </div>
               </div>
@@ -809,10 +817,10 @@ export default function App() {
               {/* Pitch comparison block */}
               <div className="border-t border-slate-200 pt-8 text-center space-y-5">
                 <div className="max-w-xl mx-auto space-y-2.5">
-                  <p className="text-sm sm:text-base font-extrabold text-web-navy">
+                  <p className="text-base sm:text-lg font-extrabold text-web-navy">
                     Sua meta é alcançar uma agenda lotada?
                   </p>
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-semibold">
+                  <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-semibold">
                     Encaminhe o seu diagnóstico diretamente no nosso WhatsApp para agendar uma <strong>Consultoria Personalizada Gratuita</strong>. Analisaremos suas respostas detalhadamente e traçaremos um plano prático para você atrair pacientes qualificados sem infringir as diretrizes do CRP.
                   </p>
                 </div>
@@ -820,14 +828,14 @@ export default function App() {
                 <div className="pt-2 space-y-3.5 flex flex-col items-center">
                   <button
                     onClick={handleCTAWhatsApp}
-                    className="w-full sm:w-auto bg-web-lime hover:bg-web-lime/90 active:bg-web-lime/85 text-web-dark font-display font-extrabold text-sm sm:text-base px-8 py-4.5 rounded-xl shadow-xl shadow-web-lime/10 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-row items-center justify-center space-x-2.5 cursor-pointer animate-pulse"
+                    className="w-full sm:w-auto bg-web-lime hover:bg-web-lime/90 active:bg-web-lime/85 text-web-dark font-display font-extrabold text-base sm:text-lg px-8 py-4.5 rounded-xl shadow-xl shadow-web-lime/10 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-row items-center justify-center space-x-2.5 cursor-pointer animate-pulse"
                   >
                     <MessageCircle className="w-5.5 h-5.5 fill-web-dark shrink-0 text-web-dark" />
                     <span>Solicitar Consultoria Personalizada por WhatsApp</span>
                     <ArrowRight className="w-4 h-4 text-web-dark" />
                   </button>
                   
-                  <div className="text-xs sm:text-sm text-slate-500 font-bold tracking-wide uppercase">
+                  <div className="text-base sm:text-lg text-slate-500 font-bold tracking-wide uppercase">
                      Sem compromisso comercial
                   </div>
                 </div>
@@ -843,7 +851,7 @@ export default function App() {
                   setCurrentIdx(0);
                   setAnswers({});
                 }}
-                className="text-xs text-slate-500 hover:text-slate-600 hover:underline inline-flex items-center space-x-1.5 cursor-pointer"
+                className="text-base text-slate-500 hover:text-slate-600 hover:underline inline-flex items-center space-x-1.5 cursor-pointer"
               >
                 <ArrowRightLeft className="w-3.5 h-3.5" />
                 <span>Refazer o teste de diagnóstico</span>
@@ -856,15 +864,15 @@ export default function App() {
       </main>
 
       {/* FOOTER CONTAINER */}
-      <footer className="bg-white border-t border-web-green/10 py-8 px-4 mt-12 text-center text-sm text-slate-600 space-y-4 relative z-10">
+      <footer className="bg-white border-t border-web-green/10 py-8 px-4 mt-12 text-center text-base text-slate-600 space-y-4 relative z-10">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-left space-y-1.5">
-            <span className="font-display font-bold text-web-navy text-sm sm:text-base">Quiz de Maturidade Digital para Psicólogos</span>
-            <p className="text-xs sm:text-sm text-slate-600">Uma solução estratégica desenvolvida em parceria com a agência de captação Webconverte.</p>
+            <span className="font-display font-bold text-web-navy text-base sm:text-lg">Quiz de Maturidade Digital para Psicólogos</span>
+            <p className="text-base sm:text-lg text-slate-600">Uma solução estratégica desenvolvida em parceria com a agência de captação Webconverte.</p>
           </div>
           <div className="flex flex-wrap items-center gap-3 md:gap-4 shrink-0 justify-center">
-            <span className="text-xs bg-slate-50 border border-web-green/20 text-slate-700 px-3 py-1 rounded font-bold font-mono">Versão 1.0.0</span>
-            <span className="text-xs text-slate-500 font-semibold">© {new Date().getFullYear()} Webconverte. Todos os direitos reservados.</span>
+            <span className="text-base bg-slate-50 border border-web-green/20 text-slate-700 px-3 py-1 rounded font-bold font-mono">Versão 1.0.0</span>
+            <span className="text-base text-slate-500 font-semibold">© {new Date().getFullYear()} Webconverte. Todos os direitos reservados.</span>
           </div>
         </div>
       </footer>

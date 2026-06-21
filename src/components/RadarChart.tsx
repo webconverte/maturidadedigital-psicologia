@@ -193,12 +193,12 @@ export const RadarChart: React.FC<RadarChartProps> = ({ scores }) => {
         </svg>
       </div>
  
-      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full text-xs sm:text-sm border-t border-slate-200 pt-4">
+      <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full text-base sm:text-base border-t border-slate-200 pt-4">
         {pillars.map((p) => (
           <div key={`legend-${p.key}`} className="flex items-center space-x-2 bg-slate-50 px-3 py-2 rounded-xl border border-web-green/5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#88A65B] shrink-0"></span>
-            <span className="text-slate-700 font-semibold text-sm sm:text-base truncate">{p.label}</span>
-            <span className="font-mono text-[#88A65B] ml-auto font-black text-sm sm:text-base">{p.val}%</span>
+            <span className="text-slate-700 font-semibold text-base sm:text-base truncate">{p.label}</span>
+            <span className="font-mono text-[#88A65B] ml-auto font-black text-base sm:text-base">{p.val}%</span>
           </div>
         ))}
       </div>
