@@ -3,7 +3,6 @@ import {
   QUESTIONS, 
   PERSONAS 
 } from './data/questions';
-import { DeveloperSettings } from './components/DeveloperSettings';
 import { 
   AnswerOption, 
   QuizScores, 
@@ -218,8 +217,8 @@ export default function App() {
     try {
       setSubmitting(true);
       
-      // Get customized localstorage webhook URL if saved
-      const customWebhookUrl = localStorage.getItem('webconverte_webhook_url') || import.meta.env.VITE_MAKE_WEBHOOK_URL;
+      // Hardcoded Make Webhook URL
+      const customWebhookUrl = "https://hook.us2.make.com/khm84uu7jkytw1cxdpgn6mpq2ohvkujg";
 
       // Detailed text of answers as a single string for Make/Spreadsheets
       let answersText = "";
@@ -921,9 +920,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-
-      {/* DEVELOPER SETTINGS WIDGET */}
-      <DeveloperSettings />
     </div>
   );
 }
