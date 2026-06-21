@@ -304,7 +304,7 @@ export default function App() {
       answersList +
       `\nGostaria de agendar a minha consultoria personalizada para traçarmos o plano rumo à previsibilidade de pacientes!`
     );
-    window.open(`https://wa.me/5548991444144?text=${encodedText}`, '_blank');
+    window.open(`https://wa.me/5583986553546?text=${encodedText}`, '_blank');
   };
 
   // Helper to map light-themed checklist colors to gorgeous badge styles
